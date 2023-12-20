@@ -1876,6 +1876,19 @@ var require_base_emoji = __commonJS({
           result = result * baseEmoji.base + baseEmoji.charset.indexOf(e);
         });
         return result;
+      },
+      encodeString: (string) => {
+        let res = "";
+        let spl = string.split("").map((e) => baseEmoji.encode(e.charCodeAt(0)));
+        return spl.join("");
+      },
+      decodeString: (string) => {
+        let result = "";
+        let temp = baseEmoji.decode(string);
+        for (let i = 0; i < temp.length; i++) {
+          result += String.fromCharCode(temp[i]);
+        }
+        return result;
       }
     };
     globalThis?.window && (window.baseEmoji = baseEmoji, window.module = baseEmoji);
