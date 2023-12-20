@@ -8,8 +8,21 @@ const baseEmoji = {  charset: [    "😀",    "😃",    "😄",    "😁",
   },
   encodeString: (string: string) => {
     let spl = string.split('').map((e) => baseEmoji.encode(e.charCodeAt(0)))
-    return spl
-  }};
+    return spl.join('')
+  },
+  decodeString: (string: string) => {
+    let spl = string
+      .split('')
+
+    let o = []
+
+    for (let i = 0; i < spl.length; i+=2) {
+      o[i] = String.fromCharCode(baseEmoji.decode(spl[i] + spl[i + 1]))
+    }
+
+    console.log(o.join(''))
+    return o.join('')
+  },};
 
 (globalThis?.window) && (
   (window as any).baseEmoji = baseEmoji,

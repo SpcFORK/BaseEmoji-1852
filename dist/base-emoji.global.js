@@ -1880,17 +1880,16 @@
           return result;
         },
         encodeString: (string) => {
-          let res = "";
           let spl = string.split("").map((e) => baseEmoji.encode(e.charCodeAt(0)));
           return spl.join("");
         },
         decodeString: (string) => {
-          let result = "";
-          let temp = baseEmoji.decode(string);
-          for (let i = 0; i < temp.length; i++) {
-            result += String.fromCharCode(temp[i]);
+          let spl = string.split("");
+          let o = [];
+          for (let i = 0; i < spl.length; i += 2) {
+            o[i] = String.fromCharCode(baseEmoji.decode(spl[i] + spl[i + 1]));
           }
-          return result;
+          console.log(o.join(""));
         }
       };
       globalThis?.window && (window.baseEmoji = baseEmoji, window.module = baseEmoji);
